@@ -291,9 +291,9 @@ Following PCR amplification, run products through 2% agarose gel to confirm pres
     - Can be found online at: [LIMS Project Submission](https://rtsf.natsci.msu.edu/genomics/lims-project-submission.aspx)
 5. Login to [LabLink](https://msu.claritylims.com/lablink/login) and create a project for the sequencing run.
 6. Upload project and run information, sample submission form and gel images (annotated) to the project.
-7. Prepare plates for shipping by obtaining dry ice (5-10lbs depending on quantity of plates), a styrofoam cooler and fitted carboard box.
+7. Prepare plates for shipping by obtaining dry ice (5-10lbs depending on quantity of plates), a styrofoam cooler and fitted cardboard box.
 8. Place 1-2 inches of dry ice on bottom of styrofoam cooler followed by sequencing plates then the remainder of dry ice.
-9. Place lid on cooler (do not tape shut) and place cooler into carboard box.
+9. Place lid on cooler (do not tape shut) and place cooler into cardboard box.
 10. Tape the cardboard box shut and attach a shipping label.
 
 #### Sequencing Facility Protocol
