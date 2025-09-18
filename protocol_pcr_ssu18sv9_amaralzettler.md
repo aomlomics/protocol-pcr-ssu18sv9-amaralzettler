@@ -58,6 +58,10 @@ annealingTemp: 57
 pcr_cycles: 35
 pcr_analysis_software: not provided
 pcr_method_additional: not provided
+sequencing_location: Michigan State University Research Technology Support Facility Genomics Core
+platform: ILLUMINA
+instrument: Illumina MiSeq [OBI:0002003]
+seq_kit: MiSeq Reagent Kit v2 (300 cycles)
 ---
 
 # NOAA/AOML PCR Protocol 18S rRNA V9 (EMP)
@@ -107,6 +111,7 @@ pcr_method_additional: not provided
 | 1.0.0 | 2021-08-22 | Initial release |
 | 1.0.1 | 2024-10-23 | Formatting edits |
 | 1.1.0 | 2024-11-16 | Addition of FAIR eDNA terms in YAML frontmatter |
+| 1.2.0 | 2025-09-18 | Addition of sequencing preparation and Illumina sequencing facility information |
 
 ### Acronyms and Abbreviations
 
@@ -132,7 +137,7 @@ pcr_method_additional: not provided
 
 ### Summary
 
-This protocol describes steps for performing PCR for [18S rRNA](target_gene) [V9](target_subfragment) marker gene regions using eDNA extracted from Sterivex at NOAA's AOML. There are several optional steps at the end of the protocol including using AMPure beads to clean up PCR products. Some steps (e.g. PCR plate preparation, AMPure bead cleanup, sequencing plate dilutions) have been or can be optimized for use with the Opentrons OT2 robot.
+This protocol describes steps for performing PCR for [18S rRNA](target_gene) [V9](target_subfragment) marker gene regions using eDNA extracted from Sterivex at NOAA's AOML. There are several optional steps towards the end of the protocol including using AMPure beads to clean up PCR products. The PCR protocol only includes a primary PCR step as the secondary PCR, library preparation and Illumina sequencing is completed by Michigan State University's RTSF Genomics Core. Steps related to preparing samples for sequencing and the Genomics Core's procedure are included. Some steps (e.g. PCR plate preparation) have been or can be optimized for use with the Opentrons OT2 robot.
 
 ### Method description and rationale
 
@@ -248,12 +253,10 @@ For 96-well Plate:
 | Final Extension | 72°C | 10min | 1x |
 | Hold | 4°C | ∞ | |
 
-#### Quality control, PCR clean-up
+#### Quality Control and PCR Clean-Up
 
 2% Agarose Gel
-
 Following PCR amplification, run products through 2% agarose gel to confirm presence of target bands:
-
 1. Make stock solution of TBE buffer (1x) in a 1-L glass container by adding 100 ml of stock TBE buffer (10x) to 900 ml DI water.
 2. For a 5.5in x 5.5in gel tray, mix 200 ml of TBE buffer (1x) and 4 g of agarose in a flask. Use scale to weigh agarose.
 3. Microwave mixture for 1 minute, followed by 15-30 second intervals. Watch carefully after 1 minute - mixture can bubble out of flask! The agarose should be fully dissolved so that the solution is mostly clear. Wear a protective glove when handling flask as the mixture will be hot.
@@ -270,22 +273,37 @@ Following PCR amplification, run products through 2% agarose gel to confirm pres
 14. Run gel at 100 V for 40-50 min then visualize on gel reader machine.
 
 (OPTIONAL) Purify PCR products using AMPure beads protocol (optimized for Opentrons)
-
-15. Follow along with AMPure XP beads manufacturer protocol (begins on page 5 of manual - <https://www.beckmancoulter.com/wsrportal/techdocs?docname=B37419>).
-16. Will need magnetic plate and fresh 70% ethanol.
-17. End product will be ~40 ul of cleaned DNA eluted in molecular grade water.
+1. Follow along with AMPure XP beads manufacturer protocol (begins on page 5 of manual - <https://www.beckmancoulter.com/wsrportal/techdocs?docname=B37419>).
+2. Will need magnetic plate and fresh 70% ethanol.
+3. End product will be ~40 ul of cleaned DNA eluted in molecular grade water.
 
 (OPTIONAL) Run Qubit on final PCR Products
-
-18. Follow manufacturer protocol for running Qubit: <https://tools.thermofisher.com/content/sfs/manuals/Qubit_dsDNA_HS_Assay_UG.pdf>.
+1. Follow manufacturer protocol for running Qubit: <https://tools.thermofisher.com/content/sfs/manuals/Qubit_dsDNA_HS_Assay_UG.pdf>.
 
 (OPTIONAL) Run Second 2% Agarose Gel on Purified PCR Products
+1. Follow along with previous gel instructions.
 
-19. Follow along with previous gel instructions.
+#### Sequencing Preparation
+1. After performing a gel on the PCR products, pipette 10 uL of each sample into their respective wells of a new 96-well PCR plate.
+    - Leave well H12 empty for Michigan State's sequencing negative control
+3. Seal plate, label with ID and place in freezer till day of shipping.
+4. Fill out Illumina Sample Submission form with sample information and 96-well plate format.
+    - Can be found online at: [LIMS Project Submission](https://rtsf.natsci.msu.edu/genomics/lims-project-submission.aspx)
+5. Login to [LabLink](https://msu.claritylims.com/lablink/login) and create a project for the sequencing run.
+6. Upload project and run information, sample submission form and gel images (annotated) to the project.
+7. Prepare plates for shipping by obtaining dry ice (5-10lbs depending on quantity of plates), a styrofoam cooler and fitted carboard box.
+8. Place 1-2 inches of dry ice on bottom of styrofoam cooler followed by sequencing plates then the remainder of dry ice.
+9. Place lid on cooler (do not tape shut) and place cooler into carboard box.
+10. Tape the cardboard box shut and attach a shipping label.
 
-### Quality control
+#### Sequencing Facility Protocol
+Information on sequencing is provided by Michigan State University's Genomics Core Facility:
 
-The inclusion of a negative control for PCR is to confirm the absence of contamination during the process. The inclusion of a positive control (mock community) is to confirm the PCR is amplifying DNA. There are several optional steps at the end of the process to confirm the presence and concentration of amplified DNA.
+The Genomics Core performs a secondary PCR using dual-indexed, Illumina compatible primers which target the Fluidigm CS1/CS2 oligomers at the ends of the primary PCR products. Amplicons are batch normalized using the Charm Biotech PCR Normalization and Purification kit and the recovered product is pooled. The pool is QC'd and quantified using a combination of Biotium AccuGreen High Sensitivity dsDNA, Agilent 4200 TapeStation HS DNA1000 and Invitrogen Collibri Library Quantification qPCR assays.
+
+Each pool is loaded onto one (1) Illumina MiSeq v2 Standard flow cell. Sequencing is carried out in a 2x150bp paired end format using a MiSeq v2 300 cycle reagent cartridge. Custom sequencing and index primers complementary to the Fluidigm CS1 and CS2 oligomers are added to appropriate wells of the reagent cartridge. Base calling is done by Illumina Real Time Analysis (RTA) v1.18.54 and output of RTA is demultiplexed and converted to FastQ format with Illumina Bcl2fastq v2.20.0. A summary of the run output is provided by MSU and basic QC information about sequence data is provided by the accompanying FastQC reports. For information regarding interpretation of these reports, please see the FastQC Tutorial and FAQ from [MSU's website](https://rtsf.natsci.msu.edu/genomics/technical-documents/fastqc-tutorial-and-faq.aspx).
+
+Data is downloaded using an account on the Genomics FTP server. See the [Genomics FAQ](https://rtsf.natsci.msu.edu/genomics/data-retrieval.aspx) for general instructions. Sequence data typically remains available on the FTP server for 60 days. It is the responsibility of the researcher to download and store data long term. The RTSF Genomics Core only guarantees retention of sequence data for one year from the data of availability.
 
 ### Basic troubleshooting guide
 
